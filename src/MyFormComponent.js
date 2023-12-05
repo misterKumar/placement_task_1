@@ -69,16 +69,18 @@ const MyFormComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form validation here
+   
     if (formData.name && formData.age && formData.country) {
       // If validation passes, navigate to the "Thank You" page
       navigate('/thank-you', { state: { formData } });
     } else {
-      // Handle validation error, display a message or prevent submission
+    
       alert('Please fill out all fields');
     }
   };
 
+  const sortedCountries = countries.slice().sort((a, b) => a.name.localeCompare(b.name));
+  
   return (
     <FormContainer>
       <form onSubmit={handleSubmit}>
@@ -94,7 +96,7 @@ const MyFormComponent = () => {
           Country:
           <FormSelect name="country" value={formData.country} onChange={handleChange}>
             <option value="">Select Country</option>
-            {countries.map(country => (
+            {sortedCountries.map(country => (
               <option key={country.code} value={country.code}>
                 {country.name}
               </option>
